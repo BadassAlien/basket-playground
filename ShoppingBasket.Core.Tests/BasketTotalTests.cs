@@ -21,6 +21,8 @@ namespace ShoppingBasket.Core.Tests
              new List<IDiscountRule>()
             {
                 new Buy2ButtersGet1Bread50Off(),
+                new Buy2ButtersGet1Bread50Off(),
+                new Buy3MilksGet4thFreeRule(),
                 new Buy3MilksGet4thFreeRule(),
             });
             _basket = new Basket(log.Object, drp.Object);

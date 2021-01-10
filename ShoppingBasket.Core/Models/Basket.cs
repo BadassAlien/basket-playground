@@ -59,12 +59,15 @@ namespace ShoppingBasket.Core.Models
             var rules = _discountsProvider.GetAvailableDiscounts();
             foreach (var rule in rules)
             {
-                if (!rule.IsApplicable(_items))
+                var ruleExists = _applicableDiscounts.Any(x => x.GetType() == rule.GetType());
+                if (!rule.IsApplicable(_items) || ruleExists)
                     continue;
+                _applicableDiscounts.Add(rule);
 
                 var discount = rule.ApplyDiscount(_items);
                 total -= discount;
-                _applicableDiscounts.Add(rule);
+
+
             }
             var result = Math.Round(total, 2);
 
